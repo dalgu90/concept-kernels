@@ -1,0 +1,16 @@
+name: ssl_gnn
+params:
+  input_embed_dim: 186
+  conv_layer_type: GATConv
+  conv_num_layers: 1
+  conv_hidden_dim: 29
+  gat_num_heads: 4
+  conv_pool_method: max
+  edge_active_ratio: 0.7016507238995316
+  mlp_num_layers: 3
+  mlp_hidden_dim: 128
+  dropout: 0.1
+  l1_weight: 0.0
+  ssl_loss_type: 'SCL'
+  tau: 0.1
+  l2_weight: 0.0

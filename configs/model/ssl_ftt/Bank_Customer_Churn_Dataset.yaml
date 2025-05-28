@@ -1,0 +1,23 @@
+name: ssl_ftt
+label: enctune
+params:
+  token_bias: True
+  n_layers: 4
+  d_token: 64
+  n_heads: 8
+  d_ffn_factor: 2.664336946210589
+  attention_dropout: 0.49049777525222615
+  ffn_dropout: 0.01068850130067893
+  residual_dropout: 0.0
+  activation: reglu
+  prenormalization: False
+  initialization: xavier
+  kv_compression: null
+  kv_compression_sharing: null
+  mlp_num_layers: 4
+  mlp_hidden_dim: 128
+  dropout: 0.1
+  ssl_loss_type: 'SCL'
+  tau: 0.1
+  l1_weight: 0.0
+  l2_weight: 0.0

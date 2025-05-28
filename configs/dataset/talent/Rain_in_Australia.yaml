@@ -1,0 +1,13 @@
+name: talent_dataset
+data_common: &data_common
+  dataset_dir: &dataset_dir data/talent
+  dataset_name: Rain_in_Australia
+  use_onehot: false
+  col_embed_model: mpnet
+params:
+  train:
+    ${dataset.data_common}
+  val:
+    ${dataset.data_common}
+  test:
+    ${dataset.data_common}

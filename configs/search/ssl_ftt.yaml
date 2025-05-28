@@ -1,0 +1,14 @@
+name: tpe_search
+sampler: TPESampler
+eval_metric: rmse
+direction: minimize
+max_trial: 100
+search_space:
+  - name: model.params.mlp_num_layers
+    dist: ["int", [2, 5], {}]
+  - name: model.params.mlp_hidden_dim
+    dist: ["int", [16, 256], {log: true}]
+  - name: trainer.params.optimizer.params.lr
+    dist: ["float", [3e-5, 3e-3], {log: true}]
+  - name: trainer.params.optimizer.params.weight_decay
+    dist: ["float", [1e-6, 1e-3], {log: true}]

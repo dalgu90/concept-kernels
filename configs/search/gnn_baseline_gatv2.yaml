@@ -1,0 +1,24 @@
+name: tpe_search
+sampler: TPESampler
+eval_metric: rmse
+direction: minimize
+max_trial: 100
+search_space:
+  - name: model.params.input_embed_dim
+    dist: ["int", [16, 256], {log: true}]
+  - name: model.params.conv_num_layers
+    dist: ["int", [1, 3], {}]
+  - name: model.params.conv_hidden_dim
+    dist: ["int", [16, 64], {log: true}]
+  - name: model.params.gat_num_heads
+    dist: ["int", [1, 4], {}]
+  - name: model.params.edge_active_ratio
+    dist: ["float", [0.1, 0.9], {}]
+  - name: model.params.mlp_num_layers
+    dist: ["int", [2, 5], {}]
+  - name: model.params.mlp_hidden_dim
+    dist: ["int", [16, 256], {log: true}]
+  - name: trainer.params.optimizer.params.lr
+    dist: ["float", [3e-5, 1e-3], {log: true}]
+  - name: trainer.params.optimizer.params.weight_decay
+    dist: ["float", [1e-6, 1e-3], {log: true}]

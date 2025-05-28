@@ -1,0 +1,21 @@
+defaults:
+  - dataset: talent/communities_and_crime
+  - model: gsp_baseline_simple
+  - trainer: base_trainer
+  - _self_
+
+seed: 0
+test: false
+test_all_split: true
+label: ""
+output_dir: results/{dataset_name}/{model_name}/seed${seed}
+
+hydra:
+  output_subdir: null
+  run:
+    dir: results
+  job_logging:
+    version: 1
+    disable_existing_loggers: false
+    root:
+      handlers: []

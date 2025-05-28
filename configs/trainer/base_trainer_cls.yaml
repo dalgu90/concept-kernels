@@ -1,0 +1,58 @@
+name: base_trainer
+params:
+  output_dir: ${output_dir}
+  use_gpu: true
+  num_gpus: 1
+  data_loader:
+    batch_size: 1024
+    num_workers: 0
+    shuffle: true
+    drop_last: false
+  num_threads: 4
+  optimizer:
+    name: adam_w
+    params:
+      lr: 0.001
+      weight_decay: 0.0
+  max_epochs: 200
+  lr_scheduler: null
+  stopping_criterion:
+    metric:
+      name: loss_total
+    desired: min
+    patience: 999
+  checkpoint_saver:
+    name: base_saver
+    params:
+      checkpoint_dir: ${output_dir}
+      interval: 1
+      max_to_keep: 1
+      ckpt_fname_format: "ckpt-{}.pth"
+      best_fname_format: "best-{}.pth"
+      metric:
+        name: accuracy
+      desired: max
+  eval_metrics: &eval_metrics
+    - name: accuracy
+    - name: f1_score
+  graph:
+    writer:
+      name: tensorboard
+      params:
+        log_dir: ${output_dir}
+    train:
+      interval: 10
+      interval_unit: step
+      metric:
+        - name: loss_total
+        - name: accuracy
+        - name: f1_score
+    val:
+      interval: 1
+      interval_unit: epoch
+      metric:
+        - name: loss_total
+        - name: accuracy
+        - name: f1_score
+  test_last_ckpt: false
+  test_save_output: false

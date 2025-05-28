@@ -1,0 +1,76 @@
+name: ssl_trainer
+params:
+  output_dir: ${pretrain_dir}
+  use_gpu: true
+  num_gpus: 1
+  phase: pretrain
+  data_augment:
+    name: transition
+    params:
+      num_transition: 2
+      scale_jitter: 0.0
+  data_loader:
+    batch_size: 1024
+    num_workers: 0
+    shuffle: true
+    drop_last: false
+  num_threads: 4
+  optimizer:
+    name: adam_w
+    params:
+      lr: 2e-5
+      weight_decay: 0.0
+  #optimizer:
+    #name: sgd
+    #params:
+      #lr: 0.03
+      #weight_decay: 0.0005
+      #momentum: 0.9
+  max_epochs: 1000
+  lr_scheduler:
+    name: cosine_warmup
+    params:
+      warmup_epochs: 10
+      warmup_lr: 0
+      base_lr: -1.0
+      final_lr: 0
+      iter_per_epoch: -1
+      num_epochs: -1
+  stopping_criterion:
+    metric:
+      name: loss_total
+    desired: min
+    patience: 999
+  checkpoint_saver:
+    name: base_saver
+    params:
+      checkpoint_dir: ${pretrain_dir}
+      interval: 1
+      max_to_keep: 1
+      ckpt_fname_format: "ckpt-{}.pth"
+      best_fname_format: "best-{}.pth"
+      metric:
+        name: loss_total
+      desired: min
+  eval_metrics: &eval_metrics []
+  graph:
+    writer:
+      name: tensorboard
+      params:
+        log_dir: ${pretrain_dir}
+    train:
+      interval: 10
+      interval_unit: step
+      metric:
+        - name: loss_total
+        - name: loss_part1
+        - name: loss_part2
+    val:
+      interval: 1
+      interval_unit: epoch
+      metric:
+        - name: loss_total
+        - name: loss_part1
+        - name: loss_part2
+  test_last_ckpt: false
+  test_save_output: false

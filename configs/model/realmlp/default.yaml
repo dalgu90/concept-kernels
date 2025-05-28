@@ -1,0 +1,9 @@
+name: realmlp
+params:
+  num_emb_type: 'pbld'
+  add_front_scale: true
+  p_drop: 0.15
+  act: 'selu'
+  hidden_sizes: '256,256,256'
+  plr_sigma: 0.1
+  ls_eps: 0.1

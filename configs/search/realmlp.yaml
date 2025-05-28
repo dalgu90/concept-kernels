@@ -1,0 +1,23 @@
+name: tpe_search
+sampler: TPESampler
+eval_metric: rmse
+direction: minimize
+max_trial: 100
+search_space:
+  - name: model.params.num_emb_type
+    dist: ["categorical", [["none", "pbld"]], {}]
+  - name: model.params.p_drop
+    dist: ["categorical", [[0.0, 0.15]], {}]
+  - name: model.params.act
+    dist: ["categorical", [["selu", "mish"]], {}]
+  - name: model.params.hidden_sizes
+    dist: ["categorical", [["256,256,256", "64,64,64,64,64", "512"]], {}]
+  - name: model.params.plr_sigma
+    dist: ["float", [0.05, 0.5], {log: true}]
+  - name: model.params.ls_eps
+    dist: ["categorical", [[0.0, 0.1]], {}]
+    cond: "search.eval_metric == 'accuracy'"
+  - name: trainer.params.optimizer.params.lr
+    dist: ["float", [0.02, 0.1], {log: true}]
+  - name: trainer.params.optimizer.params.weight_decay
+    dist: ["categorical", [[0.0, 2e-2]], {}]

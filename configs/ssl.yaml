@@ -1,0 +1,30 @@
+defaults:
+  - dataset: talent/communities_and_crime
+  - model: ssl_ftt
+  - trainer: ssl_pretrain
+  - _self_
+
+seed: 0
+phase: pretrain
+test: false
+test_all_split: true
+label: ""
+pretrain_dir: results/{dataset_name}/{model_name}/pretrain
+output_dir: results/{dataset_name}/{model_name}/finetune/seed${seed}
+
+dataset:
+  data_common:
+    use_onehot: true
+trainer:
+  params:
+    freeze_encoder: false
+
+hydra:
+  output_subdir: null
+  run:
+    dir: results
+  job_logging:
+    version: 1
+    disable_existing_loggers: false
+    root:
+      handlers: []

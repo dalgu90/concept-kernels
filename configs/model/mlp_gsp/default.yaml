@@ -1,0 +1,13 @@
+name: mlp_gsp
+params:
+  gsp_matrix_type: "adj"
+  gsp_num_comps: 10000
+  gsp_cluster_method: "HDBSCAN"
+  use_raw_kernel: true
+  num_emb_type: 'pbld'
+  add_front_scale: true
+  p_drop: 0.15
+  act: 'selu'
+  hidden_sizes: '256,256,256'
+  plr_sigma: 0.1
+  ls_eps: 0.1
